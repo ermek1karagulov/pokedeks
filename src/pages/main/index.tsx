@@ -18,21 +18,21 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="boxSX">
-      <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%" }} display="flex" justifyContent="center">
+      <Box maxWidth="70rem" padding={10}>
         <Grid
           container
-          spacing={{ xs: 1 }}
-          columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }}
+          spacing={{ xs: 2 }}
+          columns={{ xs: 1, sm: 2, md: 2, lg: 3, xl: 3 }}
         >
           {allPokemons.map((pokemon, i) => (
             <Grid item xs={1} sm={1} md={1} key={i}>
-              <PokemonCard {...pokemon} id={i + 1} key={i} />
+              <PokemonCard name={pokemon.name} id={i + 1} key={i} />
             </Grid>
           ))}
         </Grid>
       </Box>
-    </div>
+    </Box>
   );
 };
 

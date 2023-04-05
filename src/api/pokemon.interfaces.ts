@@ -10,6 +10,8 @@ export interface IFetchPokemonsResponse {
 }
 
 export interface IPokemonDetail {
+  name: string;
+  base_experience: number;
   height: number;
   weight: number;
   abilities: {

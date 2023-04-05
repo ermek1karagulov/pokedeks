@@ -23,7 +23,8 @@ export const requests = {
 const pokemon = {
   getAllPokemons: () =>
     requests.get<IFetchPokemonsResponse>(`/pokemon?limit=200&offset=0`),
-  getOnePokemonDetail: (url: string) => requests.get<IPokemonDetail>(url),
+  getOnePokemonDetail: (id: string | number) =>
+    requests.get<IPokemonDetail>(`pokemon/${id}`),
 };
 
 const agent = {
