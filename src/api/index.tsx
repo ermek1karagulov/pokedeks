@@ -1,29 +1,37 @@
-import axios, { AxiosResponse } from "axios";
-import { IFetchPokemonsResponse, IPokemonDetail } from "./pokemon.interfaces";
+import axios from "axios";
+import {
+  IFetchPokemonTypesResponse,
+  IFetchPokemonsResponse,
+  IPokemon,
+  IPokemonDetail,
+} from "./pokemon.interfaces";
 
 export const API_URL = "https://pokeapi.co/api/v2";
 
 axios.defaults.baseURL = `${API_URL}`;
 
-const responseBody = <T,>(response: AxiosResponse<T>) => response.data;
-
-export const requests = {
-  get: <T,>(url: string) => axios.get<T>(url).then(responseBody),
-  post: <T,>(url: string, body: any, config?: any) =>
-    axios.post<T>(url, body, config).then(responseBody),
-  put: <T,>(url: string, body: any) =>
-    axios.put<T>(url, body).then(responseBody),
-  delete: <T,>(url: string) => axios.delete<T>(url).then(responseBody),
-};
-
 const pokemon = {
   getAllPokemons: (perPage: number, url?: string) =>
-    axios.get<IFetchPokemonsResponse>(url || `/pokemon?limit=${perPage}`, {
+    axios.get<IFetchPokemonsResponse>(url || `/pokemon`, {
       params: {
         limit: perPage,
       },
     }),
-  getOnePokemonDetail: (url: string) => requests.get<IPokemonDetail>(url),
+  searchPokemon: (perPage: number, name: string) =>
+    axios.get<IPokemonDetail>(`/pokemon/${name}`, {
+      params: {
+        limit: perPage,
+      },
+    }),
+  getOnePokemonDetail: (id: string | number) =>
+    axios.get<IPokemonDetail>(`/pokemon/${id}`),
+  getPokemonTypes: () => axios.get<IFetchPokemonTypesResponse>(`/type`),
+  sortPokemonByType: (perPage: number, type?: string) =>
+    axios.get<{ pokemon: { pokemon: IPokemon }[] }>(`/type/${type}`, {
+      params: {
+        limit: perPage,
+      },
+    }),
 };
 
 const agent = {

@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+import React from "react";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
 import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
 
 interface IProps {
-  id: number;
-  name: string;
   url: string;
+  name: string;
 }
 
-const PokemonCard = ({ name, id, url }: IProps) => {
+const PokemonCard = ({ name, url }: IProps) => {
+  const clearStr = url.at(-1) === "/" ? url.slice(0, -1) : url;
+  const id = clearStr.split("/").pop();
+
   return (
-    <Link to={`/pokemon/${url}`}>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-            alt="pokemon"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {name}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+    <Link style={{ textDecoration: "none" }} to={`/pokemon/${id}`}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        border="2px solid #047e2b"
+        borderRadius="10px"
+      >
+        <img
+          width="150px"
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+          alt="pokemon"
+        />
+        <Typography gutterBottom variant="h5" component="div" color="#047e2b">
+          {name}
+        </Typography>
+      </Box>
     </Link>
   );
 };

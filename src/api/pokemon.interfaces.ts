@@ -3,6 +3,8 @@ export interface IPokemon {
   url: string;
 }
 
+export interface IPokemonType extends IPokemon {}
+
 export interface IFetchPokemonsResponse {
   count: number;
   next: string;
@@ -10,7 +12,14 @@ export interface IFetchPokemonsResponse {
   results: IPokemon[];
 }
 
+export interface IFetchPokemonTypesResponse extends IFetchPokemonsResponse {
+  results: IPokemonType[];
+}
+
 export interface IPokemonDetail {
+  name: string;
+  id: number;
+  base_experience: number;
   height: number;
   weight: number;
   abilities: {
