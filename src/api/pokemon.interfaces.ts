@@ -6,6 +6,7 @@ export interface IPokemon {
 export interface IFetchPokemonsResponse {
   count: number;
   next: string;
+  previous: string;
   results: IPokemon[];
 }
 

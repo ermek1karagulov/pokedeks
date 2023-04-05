@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { IPokemon } from "../../api/pokemon.interfaces";
-import { fetchAllPokemons } from "./actions";
+import { addPokemons } from "./actions";
 
 interface IPokemonState {
   allPokemons: [] | IPokemon[];
@@ -11,7 +11,7 @@ const initialState: IPokemonState = {
 };
 
 export default createReducer(initialState, (builder) => {
-  builder.addCase(fetchAllPokemons, (state, { payload }) => {
+  builder.addCase(addPokemons, (state, { payload }) => {
     return {
       ...state,
       allPokemons: payload,

@@ -1,9 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import {
-  IFetchPokemonsResponse,
-  IPokemon,
-  IPokemonDetail,
-} from "./pokemon.interfaces";
+import { IFetchPokemonsResponse, IPokemonDetail } from "./pokemon.interfaces";
 
 export const API_URL = "https://pokeapi.co/api/v2";
 
@@ -21,8 +17,12 @@ export const requests = {
 };
 
 const pokemon = {
-  getAllPokemons: () =>
-    requests.get<IFetchPokemonsResponse>(`/pokemon?limit=200&offset=0`),
+  getAllPokemons: (perPage: number, url?: string) =>
+    axios.get<IFetchPokemonsResponse>(url || `/pokemon?limit=${perPage}`, {
+      params: {
+        limit: perPage,
+      },
+    }),
   getOnePokemonDetail: (url: string) => requests.get<IPokemonDetail>(url),
 };
 
