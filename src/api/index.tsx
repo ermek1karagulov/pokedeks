@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   IFetchPokemonTypesResponse,
   IFetchPokemonsResponse,
   IPokemon,
   IPokemonDetail,
-} from "./pokemon.interfaces";
+} from './pokemon.interfaces';
 
-export const API_URL = "https://pokeapi.co/api/v2";
+export const API_URL = 'https://pokeapi.co/api/v2';
 
 axios.defaults.baseURL = `${API_URL}`;
 
@@ -23,8 +23,7 @@ const pokemon = {
         limit: perPage,
       },
     }),
-  getOnePokemonDetail: (id: string | number) =>
-    axios.get<IPokemonDetail>(`/pokemon/${id}`),
+  getOnePokemonDetail: (id: string | number) => axios.get<IPokemonDetail>(`/pokemon/${id}`),
   getPokemonTypes: () => axios.get<IFetchPokemonTypesResponse>(`/type`),
   sortPokemonByType: (perPage: number, type?: string) =>
     axios.get<{ pokemon: { pokemon: IPokemon }[] }>(`/type/${type}`, {

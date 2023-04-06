@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import { TypedUseSelectorHook } from "react-redux";
-import pokemon from "./pokemon/reducer";
+import { configureStore } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
+import { TypedUseSelectorHook } from 'react-redux';
+import pokemon from './pokemon/reducer';
 
 export const store = configureStore({
   reducer: {

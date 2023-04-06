@@ -1,6 +1,6 @@
-import { createReducer } from "@reduxjs/toolkit";
-import { IPokemon } from "../../api/pokemon.interfaces";
-import { addPokemons } from "./actions";
+import { createReducer } from '@reduxjs/toolkit';
+import { IPokemon } from '../../api/pokemon.interfaces';
+import { addPokemons } from './actions';
 
 interface IPokemonState {
   allPokemons: [] | IPokemon[];

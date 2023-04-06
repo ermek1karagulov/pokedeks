@@ -1,33 +1,32 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useAllPokemons } from "../../store/pokemon/hooks";
-import PokemonCard from "../../components/PokemonCard";
-import agent from "../../api";
-import { addPokemons } from "../../store/pokemon/actions";
-import { useDispatch } from "react-redux";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import { Button, TextField, Typography } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { useNavigate } from "react-router-dom";
-import { IPokemonType } from "../../api/pokemon.interfaces";
+import React, { useEffect, useMemo, useState } from 'react';
+import { useAllPokemons } from '../../store/pokemon/hooks';
+import PokemonCard from '../../components/PokemonCard';
+import agent from '../../api';
+import { addPokemons } from '../../store/pokemon/actions';
+import { useDispatch } from 'react-redux';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import { Button, TextField, Typography } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { useNavigate } from 'react-router-dom';
+import { IPokemonType } from '../../api/pokemon.interfaces';
 
 const Main = () => {
-  const { getAllPokemons, searchPokemon, getPokemonTypes, sortPokemonByType } =
-    agent.pokemon;
+  const { getAllPokemons, searchPokemon, getPokemonTypes, sortPokemonByType } = agent.pokemon;
   const allPokemons = useAllPokemons();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [pokemonTypes, setPokemonTypes] = useState<IPokemonType[] | []>([]);
-  const [search, setSearch] = useState("");
-  const [type, setType] = useState("");
-  const [error, setError] = useState("");
+  const [search, setSearch] = useState('');
+  const [type, setType] = useState('');
+  const [error, setError] = useState('');
   const [perPage, setPerPage] = useState(10);
   const [pagination, setPagination] = useState({
-    next: "",
-    previous: "",
+    next: '',
+    previous: '',
   });
 
   const fetchPokemons = async (url?: string) => {
@@ -69,7 +68,7 @@ const Main = () => {
   const handleSearchPokemon = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!search) {
-      setError("Enter a pokemon name");
+      setError('Enter a pokemon name');
       return;
     }
     try {
@@ -78,7 +77,7 @@ const Main = () => {
         navigate(`/pokemon/${res.data.id}`);
       }
     } catch (e) {
-      setError(search + " not found");
+      setError(search + ' not found');
     }
   };
 
@@ -91,54 +90,39 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="boxSX">
-      <Box sx={{ width: "100%" }} padding="2rem">
-        <Box sx={{ width: "100%" }} display="flex" justifyContent="center">
-          <Box
-            maxWidth="70rem"
-            padding={10}
-            display="flex"
-            flexDirection="column"
-            gap="2rem"
-          >
-            <Box display="flex" justifyContent="space-between" gap="1rem">
-              <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className='boxSX'>
+      <Box sx={{ width: '100%' }} padding='2rem'>
+        <Box sx={{ width: '100%' }} display='flex' justifyContent='center'>
+          <Box maxWidth='70rem' padding={10} display='flex' flexDirection='column' gap='2rem'>
+            <Box display='flex' justifyContent='space-between' gap='1rem'>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <form onSubmit={handleSearchPokemon}>
                   <TextField
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    id="outlined-basic"
-                    label="Search by name"
-                    variant="outlined"
+                    id='outlined-basic'
+                    label='Search by name'
+                    variant='outlined'
                   />
-                  <Button
-                    type="submit"
-                    style={{ height: "100%" }}
-                    variant="contained"
-                  >
+                  <Button type='submit' style={{ height: '100%' }} variant='contained'>
                     Search
                   </Button>
                 </form>
                 {error && (
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    color="red"
-                  >
+                  <Typography gutterBottom variant='h5' component='div' color='red'>
                     {error}
                   </Typography>
                 )}
               </div>
               <div>
                 <FormControl>
-                  <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                  <InputLabel id='demo-simple-select-label'>Type</InputLabel>
                   <Select
-                    style={{ width: "5rem" }}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    style={{ width: '5rem' }}
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
                     value={type}
-                    label="Age"
+                    label='Age'
                     onChange={(e) => setType(String(e.target.value))}
                   >
                     {pokemonTypes.map((type) => (
@@ -149,12 +133,12 @@ const Main = () => {
                   </Select>
                 </FormControl>
                 <FormControl>
-                  <InputLabel id="demo-simple-select-label">Limit</InputLabel>
+                  <InputLabel id='demo-simple-select-label'>Limit</InputLabel>
                   <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
                     value={perPage}
-                    label="Age"
+                    label='Age'
                     onChange={(e) => setPerPage(Number(e.target.value))}
                   >
                     <MenuItem value={10}>10</MenuItem>
@@ -164,11 +148,7 @@ const Main = () => {
                 </FormControl>
               </div>
             </Box>
-            <Grid
-              container
-              spacing={{ xs: 2 }}
-              columns={{ xs: 1, sm: 2, md: 2, lg: 3, xl: 3 }}
-            >
+            <Grid container spacing={{ xs: 2 }} columns={{ xs: 1, sm: 2, md: 2, lg: 3, xl: 3 }}>
               {allPokemons.map((pokemon, i) => (
                 <Grid item xs={1} sm={1} md={1} key={i}>
                   <PokemonCard {...pokemon} key={pokemon.url} />
@@ -178,18 +158,12 @@ const Main = () => {
           </Box>
         </Box>
         {pagination.previous && (
-          <Button
-            onClick={() => fetchPokemons(pagination.previous)}
-            variant="contained"
-          >
+          <Button onClick={() => fetchPokemons(pagination.previous)} variant='contained'>
             Previous
           </Button>
         )}
         {pagination.next && (
-          <Button
-            onClick={() => fetchPokemons(pagination.next)}
-            variant="contained"
-          >
+          <Button onClick={() => fetchPokemons(pagination.next)} variant='contained'>
             Next
           </Button>
         )}

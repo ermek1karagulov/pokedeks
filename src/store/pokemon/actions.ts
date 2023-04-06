@@ -1,6 +1,4 @@
-import { createAction } from "@reduxjs/toolkit";
-import { IPokemon } from "../../api/pokemon.interfaces";
+import { createAction } from '@reduxjs/toolkit';
+import { IPokemon } from '../../api/pokemon.interfaces';
 
-export const addPokemons = createAction<IPokemon[]>(
-  "pokemonReducer/addPokemons"
-);
+export const addPokemons = createAction<IPokemon[]>('pokemonReducer/addPokemons');
